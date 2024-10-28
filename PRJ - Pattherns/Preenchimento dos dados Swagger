@@ -1,0 +1,18 @@
+  Cadastrar Aluno
+
+  1 -) Cria-se o Istrutor para mais tarde usar o seu ID 
+
+   Corpo da Requisição:
+
+   {
+  "cpf": "222222",
+  "dataAniversario": "2024-10-27T05:51:23.021Z",
+  "endereco": {
+ 
+    "cep": "09972260"
+  },
+  "idade": 20,
+  "nome": "França",
+  "planoSeleciondo": "PLANO_FAMILIAR_ANUAL",
+  "sexo": "F"
+}

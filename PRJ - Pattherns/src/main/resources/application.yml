@@ -1,0 +1,35 @@
+
+server.port: 8990
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/easy_fitness
+    username: spring
+    password: Spring@2024
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.format_sql: true
+  messages:
+    always-use-message-format : false
+    basename : messages
+    cache-seconds : -1
+    encoding : UTF-8
+    fallback-to-system-locale : true
+
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        type: trace
+
+security:
+  config:
+     prefix: Bearer
+     key: SECRET_KEY
+     expiration: 3600000
+
+
