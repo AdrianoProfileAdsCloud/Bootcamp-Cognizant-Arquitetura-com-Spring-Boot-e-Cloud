@@ -18,38 +18,40 @@ import edu.prj.designpatterns.security.SecurityConfig;
 
 /**
  * @author Adriano Aparecido da Silva
- * <p>
- * Controller LoginController: Esta classe terá o recurso de realizar o login e geração do token.
+ *         <p>
+ *         Controller LoginController: Esta classe terá o recurso de realizar o
+ *         login e geração do token.
  */
 
 @RestController
 public class LoginController {
-    @Autowired
-    private PasswordEncoder encoder;
-    @Autowired
-    private UserRepository repository;
+	@Autowired
+	private PasswordEncoder encoder;
+	@Autowired
+	private UserRepository repository;
 
-    @PostMapping("/login")
-    public SessaoRecord logar(@RequestBody LoginRecordRequest login) {
-        User user = repository.findByUsername(login.username());
+	@PostMapping("/login")
+	public SessaoRecord logar(@RequestBody LoginRecordRequest login) {
 
-        if (user != null) {
-            boolean passwordOk = encoder.matches(login.password(), user.getPassword());
-            if (!passwordOk) {
-                throw new RuntimeException("Senha inválida para o login: " + login.username());
-            }
-            //Estamos enviando um objeto Sessão para retornar mais informações do usuário
+		User user = repository.findByUsername(login.username());
 
+		if (user != null) {
+			boolean passwordOk = encoder.matches(login.password(), user.getPassword());
+			if (!passwordOk) {
+				throw new RuntimeException("Senha inválida para o login: " + login.username());
+			}
+			// Estamos enviando um objeto Sessão para retornar mais informações do usuário
 
-            JWTObject jwtObject = new JWTObject();
-            jwtObject.setIssuedAt(new Date(System.currentTimeMillis()));
-            jwtObject.setExpiration((new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION)));
-            jwtObject.setRoles(user.getRoles());
-            SessaoRecord sessao = new SessaoRecord(user.getUsername(), JWTCreator.create(SecurityConfig.PREFIX, SecurityConfig.KEY, jwtObject));
+			JWTObject jwtObject = new JWTObject();
+			jwtObject.setIssuedAt(new Date(System.currentTimeMillis()));
+			jwtObject.setExpiration((new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION)));
+			jwtObject.setRoles(user.getRoles());
+			SessaoRecord sessao = new SessaoRecord(user.getUsername(),
+					JWTCreator.create(SecurityConfig.PREFIX, SecurityConfig.KEY, jwtObject));
 
-            return sessao;
-        } else {
-            throw new RuntimeException("Erro ao tentar fazer login");
-        }
-    }
+			return sessao;
+		} else {
+			throw new RuntimeException("Erro ao tentar fazer login");
+		}
+	}
 }

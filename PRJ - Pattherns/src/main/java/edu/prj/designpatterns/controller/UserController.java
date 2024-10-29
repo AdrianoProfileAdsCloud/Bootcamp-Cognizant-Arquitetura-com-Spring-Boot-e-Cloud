@@ -25,10 +25,10 @@ import edu.prj.designpatterns.service.UserService;
  * 
  * O Corpo da Resposta: O conteúdo que será enviado de volta (como uma mensagem
  * de texto, JSON, etc.). O Status HTTP: um código de status que indica se a
- * requisição foi bem-sucedida, se houve erro, etc.
- * Exemplos de códigos de status incluem 200 OK, 404 Not Found, 201 Created. 
- * Os Cabeçalhos HTTP:Informações adicionais sobre a resposta, como tipo de conteúdo
- * (application/json) ou informações de cache. * 
+ * requisição foi bem-sucedida, se houve erro, etc. Exemplos de códigos de
+ * status incluem 200 OK, 404 Not Found, 201 Created. Os Cabeçalhos
+ * HTTP:Informações adicionais sobre a resposta, como tipo de conteúdo
+ * (application/json) ou informações de cache. *
  */
 
 @RestController
@@ -36,25 +36,27 @@ import edu.prj.designpatterns.service.UserService;
 @Transactional
 public class UserController {
 	@Autowired
-	private UserService service;
+	private UserService userService;
 
 	@PostMapping("/insert")
-	public ResponseEntity<Object> postUser(@RequestBody UserRequestDTO user) {
-		if (user.getName().isEmpty() || user.getUsername().isEmpty() || user.getPassword().isEmpty()
-				|| user.getRoles().isEmpty()) {
+	public ResponseEntity<Object> postUser(@RequestBody UserRequestDTO userRequestDTO) {
+
+		if (userRequestDTO.getName().isEmpty() || userRequestDTO.getUsername().isEmpty()
+				|| userRequestDTO.getPassword().isEmpty() || userRequestDTO.getRoles().isEmpty()) {
 			return new ResponseEntity<>("Campos Obrigatórios em Branco", HttpStatus.BAD_REQUEST);
 		}
-		service.createUser(user);
+		userService.createUser(userRequestDTO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
 		// Retorna o objeto do usuário criado com status 201 Created
-		return new ResponseEntity<>(user, headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(userRequestDTO, headers, HttpStatus.CREATED);
 	}
 
 	@GetMapping
 	public ResponseEntity<List<UserResponseDTO>> listUsers() {
-		List<UserResponseDTO> listUserBd = service.listUser();
+		
+		List<UserResponseDTO> listUserBd = userService.listUser();
 		return new ResponseEntity<>(listUserBd, HttpStatus.OK);
 
 	}

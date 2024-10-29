@@ -8,17 +8,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 
 
 /**
  * @autor Adriano Aparecido da Silva
- *
- * Fiz uso do Projeto Lombok tem algumas annotations para minimizar o uso de
- * código repetitivo, como gettes e setters e EqualsAndHashCode.Além de não poluir visualmente o código
  *
  */
 

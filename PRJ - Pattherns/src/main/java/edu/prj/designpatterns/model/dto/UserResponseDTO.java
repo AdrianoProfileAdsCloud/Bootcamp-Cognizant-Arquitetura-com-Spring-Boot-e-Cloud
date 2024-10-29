@@ -18,13 +18,11 @@ public class UserResponseDTO implements Serializable{
 		
 		private String name;
 		private String username;
-		private String password;
 		private List<String> roles = new ArrayList<>();
 				
-		public UserResponseDTO(String name,String username,String password,List<String>roles) {
+		public UserResponseDTO(String name,String username,List<String>roles) {
 			this.name = name;
 			this.username = username;
-			this.password = password;
 			this.roles = roles;
 		
 		}
@@ -46,14 +44,6 @@ public class UserResponseDTO implements Serializable{
 			this.username = username;
 		}
 
-		public String getPassword() {
-			return password;
-		}
-
-		public void setPassword(String password) {
-			this.password = password;
-		}
-
 		public List<String> getRoles() {
 			return roles;
 		}
@@ -68,7 +58,7 @@ public class UserResponseDTO implements Serializable{
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(name, password, roles, username);
+			return Objects.hash(name, roles, username);
 		}
 
 		@Override
@@ -80,7 +70,7 @@ public class UserResponseDTO implements Serializable{
 			if (getClass() != obj.getClass())
 				return false;
 			UserResponseDTO other = (UserResponseDTO) obj;
-			return Objects.equals(name, other.name) && Objects.equals(password, other.password)
+			return Objects.equals(name, other.name)
 					&& Objects.equals(roles, other.roles) && Objects.equals(username, other.username);
 		}
 	

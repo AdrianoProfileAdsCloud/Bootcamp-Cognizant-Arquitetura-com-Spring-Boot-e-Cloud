@@ -60,7 +60,7 @@ public class User {
 	}
 	
 	public UserResponseDTO userResponseDTO() {
-		return new UserResponseDTO(this.name, this.username,this.password,this.roles);
+		return new UserResponseDTO(this.name, this.username,this.roles);
 	}
 	
 	public User (UserRequestDTO userRequestDTO) {

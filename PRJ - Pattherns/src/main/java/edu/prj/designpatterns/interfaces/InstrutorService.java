@@ -1,11 +1,15 @@
 package edu.prj.designpatterns.interfaces;
 
+import java.util.List;
+
 import edu.prj.designpatterns.model.Instrutor;
+import edu.prj.designpatterns.model.dto.InstrutorRequestDTO;
+import edu.prj.designpatterns.model.dto.InstrutorResponseDTO;
 
 
 public interface InstrutorService {
 
-    Instrutor insertInstrutor(Instrutor instrutor);
+	Instrutor insertInstrutor(InstrutorRequestDTO instrutorRequestDTO);
 
     void deleteInstrutor(Long id);
 
@@ -13,6 +17,7 @@ public interface InstrutorService {
 
     Instrutor findById(Long id);
 
-    Instrutor findByNome(String nome);
-    Iterable<Instrutor> findAll();
+    InstrutorResponseDTO findByNome(String nome);
+    
+    List<InstrutorResponseDTO> findAll();
 }
