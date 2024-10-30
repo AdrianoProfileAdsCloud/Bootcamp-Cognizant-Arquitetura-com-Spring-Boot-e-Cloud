@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import edu.prj.designpatterns.model.Pessoa;
-import edu.prj.designpatterns.model.dto.PessoaRequestDto;
 import edu.prj.designpatterns.model.dto.PessoaResponseDto;
 
 /**
@@ -20,9 +19,9 @@ public interface PessoaService {
 
 	Optional<PessoaResponseDto> findById(Long id);
 
-	PessoaResponseDto create(PessoaRequestDto pessoaRequestDto);
+	Pessoa insert(Pessoa pessoa);
 
-	PessoaResponseDto update(Long id, PessoaRequestDto pessoaRequestDto);
+	Pessoa update(Long id, Pessoa pessoa);
 
 	void deleteById(Long id);
 

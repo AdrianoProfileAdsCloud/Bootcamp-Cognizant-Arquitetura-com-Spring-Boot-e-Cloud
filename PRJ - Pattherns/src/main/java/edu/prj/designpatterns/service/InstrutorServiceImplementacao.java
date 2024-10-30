@@ -36,7 +36,7 @@ public class InstrutorServiceImplementacao implements InstrutorService {
     }
 
     @Override
-    public InstrutorResponseDTO create(InstrutorRequestDTO instrutorRequestDTO) {
+    public Instrutor insertInstrutor(InstrutorRequestDTO instrutorRequestDTO) {
         
         String cep = instrutorRequestDTO.getEndereco().getCep();
         
@@ -54,8 +54,7 @@ public class InstrutorServiceImplementacao implements InstrutorService {
         
         // Salva o Instrutor no banco de dados e retorna
         instrutor = instrutorRepository.save(instrutor);
-        //return instrutor;
-        return modelMapper.map(instrutor, InstrutorResponseDTO.class);
+        return instrutor;
     }
 
     @Override
@@ -69,7 +68,7 @@ public class InstrutorServiceImplementacao implements InstrutorService {
     }
 
     @Override
-    public InstrutorResponseDTO findById(Long id) {
+    public Instrutor findById(Long id) {
         return null;
     }
 

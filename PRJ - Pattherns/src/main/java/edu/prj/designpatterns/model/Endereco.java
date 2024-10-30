@@ -10,6 +10,11 @@ import lombok.Data;
 
 /**
  * @autor Adriano Aparecido da Silva
+ *
+ * Fiz uso do Projeto Lombok tem algumas annotations para minimizar o uso de
+ * código repetitivo, como gettes e setters e EqualsAndHashCode.Além de não poluir visualmente o código
+ *
+ *
  *   Obs :  Referencias do curso ministrado por F alvo Jr(DIO).
  *   "Os atributos desse modelo foram gerados automaticamente pelo site
  *   jsonschema2pojo.org. Para isso, usamos o JSON de retorno da API do ViaCEP.

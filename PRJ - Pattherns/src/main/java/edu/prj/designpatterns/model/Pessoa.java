@@ -13,64 +13,66 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import edu.prj.designpatterns.model.dto.PessoaRequestDto;
-import edu.prj.designpatterns.model.dto.PessoaResponseDto;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 
 /**
  * @autor Adriano Aparecido da Silva
  *
- *        Heranca no Hibernate - Estratégia JOINED. Estratégia que cada classe é
- *        mapeada para uma tabela e a tabela da classe filha tem uma chave
- *        estrangeira que referencia a tabela Pai.
+ * Fiz uso do Projeto Lombok porque tem algumas annotations para minimizar o uso de
+ * código repetitivo, como gettes e setters e EqualsAndHashCode.Além de não poluir visualmente o código
+ *
+ *  Heranca no Hibernate - Estratégia JOINED.
+ *    Estratégia que cada classe é mapeada para uma tabela e a tabela da classe filha
+ *    tem uma chave estrangeira que referencia a tabela Pai.
  */
+
+
 
 @Entity
 @Table(name = "tab_pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
 
 public class Pessoa {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@Column(length = 50)
-	private String nome;
-
-	@ManyToOne
-	private Endereco endereco;// O endereço será preenchido via API externa - ViaCep
-
-	@Column(name = "data_nascimento")
-	private LocalDateTime dataAniversario;
-
-	private int idade;
-
-	private char sexo;
-
-	private String cpf;
-
-	public Pessoa(Long idPessoa, String nome, Endereco endereco, LocalDateTime dataAniversario, int idade, char sexo,
-			String cpf) {
-		this.id = idPessoa;
-		this.nome = nome;
-		this.endereco = endereco;
-		this.dataAniversario = dataAniversario;
-		this.idade = idade;
-		this.sexo = sexo;
-		this.cpf = cpf;
-	}
-
+	
 	public Pessoa() {
 		
 	}
 
-	public PessoaRequestDto pessoaRequestDto() {
-		return new PessoaRequestDto(this.nome,this.endereco,this.dataAniversario,this.idade,this.sexo,this.cpf);
-	}
-	
-	public PessoaResponseDto responseDto() {
-		return new PessoaResponseDto(this.nome,this.endereco,this.dataAniversario,this.idade,this.sexo);
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(length = 50)
+    private String nome;
+
+    @ManyToOne
+    private Endereco endereco;//O endereço será preenchido via API externa - ViaCep
+
+    @Column(name = "data_nascimento")
+    private LocalDateTime dataAniversario;
+
+    private int idade;
+
+    private char sexo;
+
+    private String cpf;
+
+    public Pessoa(Long id, String nome, Endereco endereco,
+                  LocalDateTime dataAniversario, int idade, char sexo, String cpf) {
+        this.id = id;
+        this.nome = nome;
+        this.endereco = endereco;
+        this.dataAniversario = dataAniversario;
+        this.idade = idade;
+        this.sexo = sexo;
+        this.cpf = cpf;
+    }
+
+
 
 	public Long getId() {
 		return id;
@@ -146,5 +148,5 @@ public class Pessoa {
 				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id) && idade == other.idade
 				&& Objects.equals(nome, other.nome) && sexo == other.sexo;
 	}
-
+    
 }
