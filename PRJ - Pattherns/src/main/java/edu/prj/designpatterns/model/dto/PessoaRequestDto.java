@@ -4,9 +4,6 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import edu.prj.designpatterns.model.Endereco;
-import edu.prj.designpatterns.model.Pessoa;
-import lombok.Data;
-import lombok.Getter;
 
 /**
  * @autor Adriano Aparecido da Silva
@@ -15,23 +12,24 @@ import lombok.Getter;
 
 public class PessoaRequestDto {
 
-    private Long id;
-    private String nome;
-    private Endereco endereco;
-    private LocalDateTime dataAniversario;
-    private int idade;
-    private char sexo;
-    private String cpf;
+	private Long id;
+	private String nome;
+	private Endereco endereco;
+	private LocalDateTime dataAniversario;
+	private int idade;
+	private char sexo;
+	private String cpf;	
 
-    public PessoaRequestDto(Pessoa pessoa){
-        this.id = pessoa.getId();
-        this.nome = pessoa.getNome();
-        this.endereco = pessoa.getEndereco();
-        this.dataAniversario = pessoa.getDataAniversario();
-        this.idade = pessoa.getIdade();
-        this.sexo = pessoa.getSexo();
-        this.cpf = pessoa.getCpf();
-    }
+	public PessoaRequestDto(String nome, Endereco endereco, LocalDateTime dataAniversario, int idade, char sexo,
+			String cpf) {
+		this.nome = nome;
+		this.endereco = endereco;
+		this.dataAniversario = dataAniversario;
+		this.idade = idade;
+		this.sexo = sexo;
+		this.cpf = cpf;
+		
+	}
 
 	public Long getId() {
 		return id;

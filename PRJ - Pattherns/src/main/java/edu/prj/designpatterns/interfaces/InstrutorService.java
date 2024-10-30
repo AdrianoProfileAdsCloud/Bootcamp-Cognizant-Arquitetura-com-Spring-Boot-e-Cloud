@@ -9,13 +9,13 @@ import edu.prj.designpatterns.model.dto.InstrutorResponseDTO;
 
 public interface InstrutorService {
 
-	Instrutor insertInstrutor(InstrutorRequestDTO instrutorRequestDTO);
+	InstrutorResponseDTO create(InstrutorRequestDTO instrutorRequestDTO);
 
     void deleteInstrutor(Long id);
 
     void updateInstrutor(Long id);
 
-    Instrutor findById(Long id);
+    InstrutorResponseDTO findById(Long id);
 
     InstrutorResponseDTO findByNome(String nome);
     

@@ -30,12 +30,12 @@ public class InstrutorController {
 	@PostMapping("/insert")
 	public ResponseEntity<Object> instrutorResponseEntity(@RequestBody InstrutorRequestDTO instrutorRequestDTO) {
 
-		Instrutor instrutor = instrutorService.insertInstrutor(instrutorRequestDTO);
+		InstrutorResponseDTO newInstrutor = instrutorService.create(instrutorRequestDTO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
 		// Retorna o objeto do usuário criado com status 201 Created
-		return new ResponseEntity<>(instrutor, headers, HttpStatus.CREATED);
+		return new ResponseEntity<>(newInstrutor, headers, HttpStatus.CREATED);
 
 	}
 

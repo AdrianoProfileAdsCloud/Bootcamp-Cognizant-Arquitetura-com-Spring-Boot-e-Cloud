@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.prj.designpatterns.model.dto.UserRequestDTO;
 import edu.prj.designpatterns.model.dto.UserResponseDTO;
-import edu.prj.designpatterns.service.UserService;
+import edu.prj.designpatterns.service.UserServiceImplementacao;
 
 /**
  * O ResponseEntity -> É uma classe do Spring Framework utilizada em APIs
@@ -36,7 +36,7 @@ import edu.prj.designpatterns.service.UserService;
 @Transactional
 public class UserController {
 	@Autowired
-	private UserService userService;
+	private UserServiceImplementacao userService;
 
 	@PostMapping("/insert")
 	public ResponseEntity<Object> postUser(@RequestBody UserRequestDTO userRequestDTO) {
