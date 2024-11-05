@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.prj.designpatterns.interfaces.PessoaService;
 import edu.prj.designpatterns.model.Pessoa;
-import edu.prj.designpatterns.model.dto.PessoaResponseDto;
+import edu.prj.designpatterns.model.dto.PessoaResponseDTO;
 
 /**
  * Esse {@link RestController} representa nossa <b>Facade</b>, pois abstrai toda
@@ -36,12 +36,12 @@ public class PessoaController {
     }
 
     @GetMapping("getAll")
-    public ResponseEntity<List<PessoaResponseDto>> getAll() {
+    public ResponseEntity<List<PessoaResponseDTO>> getAll() {
         return ResponseEntity.ok(pessoaService.getAll());
     }
 
     @GetMapping("findById/{id}")
-    public ResponseEntity<Optional<PessoaResponseDto>> findById(@PathVariable Long id) {
+    public ResponseEntity<Optional<PessoaResponseDTO>> findById(@PathVariable Long id) {
         return ResponseEntity.ok(pessoaService.findById(id));
     }
 

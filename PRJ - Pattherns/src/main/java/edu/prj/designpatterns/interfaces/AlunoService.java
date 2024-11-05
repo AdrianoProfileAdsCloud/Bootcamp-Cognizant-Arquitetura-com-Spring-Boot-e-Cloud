@@ -2,20 +2,22 @@ package edu.prj.designpatterns.interfaces;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.prj.designpatterns.model.Aluno;
+import edu.prj.designpatterns.model.dto.AlunoRequestDTO;
+import edu.prj.designpatterns.model.dto.AlunoResponseDTO;
+
 @Transactional
 public interface AlunoService {
 
-    Aluno insertAluno(Aluno aluno, Long idInstrutor);
+	AlunoResponseDTO create(AlunoRequestDTO alunoRequestDTO, Long idInstrutor);
 
-    void deleteAluno(Long id);
+	void delete(Long id);
 
-    void upadteAluno(Long id);
+	AlunoResponseDTO upadte(Long id);
 
-    Aluno findById(Long id);
+	AlunoResponseDTO findById(Long id);
 
-    Aluno findByNome(String nome);
+	AlunoResponseDTO findByNome(String nome);
 
-    Iterable<Aluno> findAll();
+	Iterable<AlunoResponseDTO> getAll();
 
 }

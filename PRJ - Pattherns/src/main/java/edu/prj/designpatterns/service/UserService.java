@@ -32,7 +32,7 @@ public class UserService {
 
 		User newUser = new User(userRequestDTO);
 		// criptografando antes de salvar no banco
-		userRequestDTO.setPassword(encoder.encode(pass));
+		newUser.setPassword(encoder.encode(pass));
 		userBD = repository.save(newUser);
 		return userBD.userResponseDTO();
 	}

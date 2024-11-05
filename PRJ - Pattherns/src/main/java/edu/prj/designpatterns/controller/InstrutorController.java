@@ -27,10 +27,10 @@ public class InstrutorController {
 		this.instrutorService = instrutorService;
 	}
 
-	@PostMapping("/insert")
+	@PostMapping("/create")
 	public ResponseEntity<Object> instrutorResponseEntity(@RequestBody InstrutorRequestDTO instrutorRequestDTO) {
 
-		Instrutor instrutor = instrutorService.insertInstrutor(instrutorRequestDTO);
+		InstrutorResponseDTO instrutor = instrutorService.create(instrutorRequestDTO);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
@@ -40,7 +40,7 @@ public class InstrutorController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Iterable<InstrutorResponseDTO>> findAll() {
+	public ResponseEntity<Iterable<InstrutorResponseDTO>> getAll() {
 		
 		List<InstrutorResponseDTO> listAll = instrutorService.findAll();		
 		return new ResponseEntity<>(listAll,HttpStatus.OK);

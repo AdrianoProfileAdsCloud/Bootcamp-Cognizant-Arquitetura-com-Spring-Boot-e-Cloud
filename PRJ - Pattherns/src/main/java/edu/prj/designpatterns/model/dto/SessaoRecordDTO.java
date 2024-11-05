@@ -56,5 +56,5 @@ package edu.prj.designpatterns.model.dto;
  *   Uma forma de demonstar meu conhecimento sobre essa forma de se criar um DTO.
  */
 
-public record SessaoRecord(String login, String token) {
+public record SessaoRecordDTO(String login, String token) {
 }

@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor //Para uso do Hibernate
 @AllArgsConstructor
 
-public class PessoaResponseDto {
+public class PessoaResponseDTO {
 
     private Long id;
     private String nome;
@@ -28,7 +28,7 @@ public class PessoaResponseDto {
     private char sexo;
 
 
-    public PessoaResponseDto(Pessoa pessoa){
+    public PessoaResponseDTO(Pessoa pessoa){
         this.id = pessoa.getId();
         this.nome = pessoa.getNome();
         this.endereco = pessoa.getEndereco();
@@ -113,7 +113,7 @@ public class PessoaResponseDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PessoaResponseDto other = (PessoaResponseDto) obj;
+		PessoaResponseDTO other = (PessoaResponseDTO) obj;
 		return Objects.equals(dataAniversario, other.dataAniversario) && Objects.equals(endereco, other.endereco)
 				&& Objects.equals(id, other.id) && idade == other.idade && Objects.equals(nome, other.nome)
 				&& sexo == other.sexo;

@@ -12,7 +12,7 @@ import edu.prj.designpatterns.interfaces.PessoaService;
 import edu.prj.designpatterns.interfaces.ViaCepService;
 import edu.prj.designpatterns.model.Endereco;
 import edu.prj.designpatterns.model.Pessoa;
-import edu.prj.designpatterns.model.dto.PessoaResponseDto;
+import edu.prj.designpatterns.model.dto.PessoaResponseDTO;
 import edu.prj.designpatterns.repository.EnderecoRepository;
 import edu.prj.designpatterns.repository.PessoaRepository;
 
@@ -44,13 +44,14 @@ public class PessoaServiceImplementacao implements PessoaService {
     // Facade: Abstrair integrações com subsistemas, provendo uma interface simples.
 
     @Override
-    public List<PessoaResponseDto> getAll() {
+    public List<PessoaResponseDTO> getAll() {
         // Buscar todos os Clientes.
+    	PessoaResponseDTO pessoaResponseDto;
         List<Pessoa> pessoas = pessoaRepository.findAll();
 
-        List<PessoaResponseDto> listPessoaResponseDto = new ArrayList<>();
+        List<PessoaResponseDTO> listPessoaResponseDto = new ArrayList<>();
         for (Pessoa pes : pessoas) {
-            PessoaResponseDto pessoaResponseDto = new PessoaResponseDto(pes);
+        	pessoaResponseDto = new PessoaResponseDTO(pes);
             pessoaResponseDto.setId(pes.getId());
             pessoaResponseDto.setNome(pes.getNome());
             pessoaResponseDto.setEndereco(pes.getEndereco());
@@ -64,10 +65,11 @@ public class PessoaServiceImplementacao implements PessoaService {
     }
 
     @Override
-    public Optional<PessoaResponseDto> findById(Long id) {
+    public Optional<PessoaResponseDTO> findById(Long id) {
 
+    	PessoaResponseDTO responseDto;
         Optional<Pessoa> pessoa =  pessoaRepository.findById(id);
-        PessoaResponseDto responseDto = new PessoaResponseDto(pessoa.get());
+        responseDto = new PessoaResponseDTO(pessoa.get());
              responseDto.setId(pessoa.get().getId());
              responseDto.setNome(pessoa.get().getNome());
              responseDto.setEndereco(pessoa.get().getEndereco());

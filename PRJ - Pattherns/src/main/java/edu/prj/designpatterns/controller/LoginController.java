@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.prj.designpatterns.model.User;
 import edu.prj.designpatterns.model.dto.LoginRecordRequest;
-import edu.prj.designpatterns.model.dto.SessaoRecord;
+import edu.prj.designpatterns.model.dto.SessaoRecordDTO;
 import edu.prj.designpatterns.repository.UserRepository;
 import edu.prj.designpatterns.security.JWTCreator;
 import edu.prj.designpatterns.security.JWTObject;
@@ -31,7 +31,7 @@ public class LoginController {
 	private UserRepository repository;
 
 	@PostMapping("/login")
-	public SessaoRecord logar(@RequestBody LoginRecordRequest login) {
+	public SessaoRecordDTO logar(@RequestBody LoginRecordRequest login) {
 
 		User user = repository.findByUsername(login.username());
 
@@ -46,7 +46,7 @@ public class LoginController {
 			jwtObject.setIssuedAt(new Date(System.currentTimeMillis()));
 			jwtObject.setExpiration((new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION)));
 			jwtObject.setRoles(user.getRoles());
-			SessaoRecord sessao = new SessaoRecord(user.getUsername(),
+			SessaoRecordDTO sessao = new SessaoRecordDTO(user.getUsername(),
 					JWTCreator.create(SecurityConfig.PREFIX, SecurityConfig.KEY, jwtObject));
 
 			return sessao;

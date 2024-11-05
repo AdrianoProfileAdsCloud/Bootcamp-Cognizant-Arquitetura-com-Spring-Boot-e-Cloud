@@ -14,37 +14,32 @@ import lombok.NoArgsConstructor;
 
 /**
  * @autor Adriano Aparecido da Silva
- * <p>
- * Fiz uso do Projeto Lombok tem algumas annotations para minimizar o uso de
- * código repetitivo, como gettes e setters e EqualsAndHashCode.Além de não poluir visualmente o código
+ *
  */
 
+public class AlunoRequestDTO {
 
-@NoArgsConstructor //Para uso do Hibernate
+	private String nome;
+	private Endereco endereco;
+	private LocalDateTime dataAniversario;
+	private int idade;
+	private char sexo;
+	private String cpf;
+	private PlanoDePagamentoEnum planoSelecionado;
+	private List<Instrutor> instrutores = new ArrayList<>();
+		
 
-
-public class AlunoDto {
-
-
-    private String nome;
-    private Endereco endereco;
-    private LocalDateTime dataAniversario;
-    private int idade;
-    private  char sexo;
-    private String cpf;
-    private PlanoDePagamentoEnum planoSeleciondo;
-    private List<Instrutor> instrutores = new ArrayList<>();
-
-    public AlunoDto(Aluno aluno){
-    this.nome = aluno.getNome();
-    this.endereco = aluno.getEndereco();
-    this.dataAniversario = aluno.getDataAniversario();
-    this.idade = aluno.getIdade();
-    this.sexo = aluno.getSexo();
-    this.cpf = aluno.getCpf();
-    this.planoSeleciondo = aluno.getPlanoSeleciondo();
-    this.instrutores = aluno.getInstrutores();
-    }
+	public AlunoRequestDTO(String nome, Endereco endereco, LocalDateTime dataAniversario, int idade, char sexo,
+			String cpf, PlanoDePagamentoEnum planoSeleciondo, List<Instrutor> instrutores) {
+		this.nome = nome;
+		this.endereco = endereco;
+		this.dataAniversario = dataAniversario;
+		this.idade = idade;
+		this.sexo = sexo;
+		this.cpf = cpf;
+		this.planoSelecionado = planoSeleciondo;
+		this.instrutores = instrutores;
+	}
 
 	public String getNome() {
 		return nome;
@@ -94,12 +89,12 @@ public class AlunoDto {
 		this.cpf = cpf;
 	}
 
-	public PlanoDePagamentoEnum getPlanoSeleciondo() {
-		return planoSeleciondo;
+	public PlanoDePagamentoEnum getPlanoSelecionado() {
+		return planoSelecionado;
 	}
 
-	public void setPlanoSeleciondo(PlanoDePagamentoEnum planoSeleciondo) {
-		this.planoSeleciondo = planoSeleciondo;
+	public void setPlanoSelecionado(PlanoDePagamentoEnum planoSelecionado) {
+		this.planoSelecionado = planoSelecionado;
 	}
 
 	public List<Instrutor> getInstrutores() {
@@ -109,6 +104,5 @@ public class AlunoDto {
 	public void setInstrutores(List<Instrutor> instrutores) {
 		this.instrutores = instrutores;
 	}
-
 
 }

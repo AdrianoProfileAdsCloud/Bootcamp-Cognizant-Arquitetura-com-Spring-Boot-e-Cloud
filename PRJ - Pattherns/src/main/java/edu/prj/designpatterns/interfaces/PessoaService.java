@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import edu.prj.designpatterns.model.Pessoa;
-import edu.prj.designpatterns.model.dto.PessoaResponseDto;
+import edu.prj.designpatterns.model.dto.PessoaResponseDTO;
 
 /**
  * Interface que define o padrão <b>Strategy</b> no domínio de cliente. Com
@@ -15,9 +15,9 @@ import edu.prj.designpatterns.model.dto.PessoaResponseDto;
  */
 public interface PessoaService {
 
-	List<PessoaResponseDto> getAll();
+	List<PessoaResponseDTO> getAll();
 
-	Optional<PessoaResponseDto> findById(Long id);
+	Optional<PessoaResponseDTO> findById(Long id);
 
 	Pessoa insert(Pessoa pessoa);
 

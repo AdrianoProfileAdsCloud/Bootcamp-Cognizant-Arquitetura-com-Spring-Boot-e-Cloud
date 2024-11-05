@@ -13,7 +13,7 @@ import lombok.Getter;
  *
  */
 
-public class PessoaRequestDto {
+public class PessoaRequestDTO {
 
     private Long id;
     private String nome;
@@ -23,7 +23,7 @@ public class PessoaRequestDto {
     private char sexo;
     private String cpf;
 
-    public PessoaRequestDto(Pessoa pessoa){
+    public PessoaRequestDTO(Pessoa pessoa){
         this.id = pessoa.getId();
         this.nome = pessoa.getNome();
         this.endereco = pessoa.getEndereco();
@@ -102,7 +102,7 @@ public class PessoaRequestDto {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PessoaRequestDto other = (PessoaRequestDto) obj;
+		PessoaRequestDTO other = (PessoaRequestDTO) obj;
 		return Objects.equals(cpf, other.cpf) && Objects.equals(dataAniversario, other.dataAniversario)
 				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id) && idade == other.idade
 				&& Objects.equals(nome, other.nome) && sexo == other.sexo;
