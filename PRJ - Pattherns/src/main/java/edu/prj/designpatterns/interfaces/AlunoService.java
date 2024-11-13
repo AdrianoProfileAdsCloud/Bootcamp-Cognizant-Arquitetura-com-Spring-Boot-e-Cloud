@@ -2,13 +2,13 @@ package edu.prj.designpatterns.interfaces;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.prj.designpatterns.model.dto.AlunoRequestDTO;
+import edu.prj.designpatterns.model.Aluno;
 import edu.prj.designpatterns.model.dto.AlunoResponseDTO;
 
 @Transactional
 public interface AlunoService {
 
-	AlunoResponseDTO create(AlunoRequestDTO alunoRequestDTO, Long idInstrutor);
+	Aluno create(Aluno aluno, Long idInstrutor);
 
 	void delete(Long id);
 
@@ -19,5 +19,7 @@ public interface AlunoService {
 	AlunoResponseDTO findByNome(String nome);
 
 	Iterable<AlunoResponseDTO> getAll();
+
+
 
 }

@@ -13,66 +13,63 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-
 /**
  * @autor Adriano Aparecido da Silva
  *
- * Fiz uso do Projeto Lombok porque tem algumas annotations para minimizar o uso de
- * código repetitivo, como gettes e setters e EqualsAndHashCode.Além de não poluir visualmente o código
- *
- *  Heranca no Hibernate - Estratégia JOINED.
- *    Estratégia que cada classe é mapeada para uma tabela e a tabela da classe filha
- *    tem uma chave estrangeira que referencia a tabela Pai.
+ *        A anotação @Inheritance(strategy = InheritanceType.JOINED) em JPA é
+ *        usada para definir estratégias de herança entre classes de entidades
+ *        em um banco de dados relacional.
+ * 
+ *        Quando você define essa anotação com InheritanceType.JOINED, a JPA
+ *        cria uma tabela para cada classe na hierarquia de herança. Em vez de
+ *        ter todas as colunas em uma única tabela, cada tabela armazena os
+ *        dados específicos da classe e usa uma chave estrangeira para
+ *        referenciar a tabela base. Essa estratégia é útil para evitar a
+ *        duplicação de dados, especialmente quando há muitos atributos
+ *        específicos em subclasses.
+ * 
+ * 
  */
-
-
 
 @Entity
 @Table(name = "tab_pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
 
 public class Pessoa {
-	
+
 	public Pessoa() {
-		
+
 	}
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(length = 50)
-    private String nome;
+	@Column(length = 50)
+	private String nome;
 
-    @ManyToOne
-    private Endereco endereco;//O endereço será preenchido via API externa - ViaCep
+	@ManyToOne
+	private Endereco endereco;// O endereço será preenchido via API externa - ViaCep
 
-    @Column(name = "data_nascimento")
-    private LocalDateTime dataAniversario;
+	@Column(name = "data_nascimento")
+	private LocalDateTime dataAniversario;
 
-    private int idade;
+	private int idade;
 
-    private char sexo;
+	private char sexo;
 
-    private String cpf;
+	private String cpf;
 
-    public Pessoa(Long id, String nome, Endereco endereco,
-                  LocalDateTime dataAniversario, int idade, char sexo, String cpf) {
-        this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.dataAniversario = dataAniversario;
-        this.idade = idade;
-        this.sexo = sexo;
-        this.cpf = cpf;
-    }
-
-
+	public Pessoa(Long id, String nome, Endereco endereco, LocalDateTime dataAniversario, int idade, char sexo,
+			String cpf) {
+		this.id = id;
+		this.nome = nome;
+		this.endereco = endereco;
+		this.dataAniversario = dataAniversario;
+		this.idade = idade;
+		this.sexo = sexo;
+		this.cpf = cpf;
+	}
 
 	public Long getId() {
 		return id;
@@ -148,5 +145,5 @@ public class Pessoa {
 				&& Objects.equals(endereco, other.endereco) && Objects.equals(id, other.id) && idade == other.idade
 				&& Objects.equals(nome, other.nome) && sexo == other.sexo;
 	}
-    
+
 }

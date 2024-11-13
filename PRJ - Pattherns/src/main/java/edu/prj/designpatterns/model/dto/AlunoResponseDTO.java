@@ -31,8 +31,8 @@ public class AlunoResponseDTO {
     private LocalDateTime dataAniversario;
     private int idade;
     private  char sexo;
-    private PlanoDePagamentoEnum planoSeleciondo;
-    private List<Instrutor> instrutores = new ArrayList<>();
+    private PlanoDePagamentoEnum planoSelecionado;
+    private List<Instrutor> instrutores;
     
     public AlunoResponseDTO() {
     	
@@ -44,7 +44,7 @@ public class AlunoResponseDTO {
     this.dataAniversario = aluno.getDataAniversario();
     this.idade = aluno.getIdade();
     this.sexo = aluno.getSexo();
-    this.planoSeleciondo = aluno.getPlanoSeleciondo();
+    this.planoSelecionado = aluno.getPlanoSelecionado();
     this.instrutores = aluno.getInstrutores();
     }
 
@@ -88,12 +88,12 @@ public class AlunoResponseDTO {
 		this.sexo = sexo;
 	}
 
-	public PlanoDePagamentoEnum getPlanoSeleciondo() {
-		return planoSeleciondo;
+	public PlanoDePagamentoEnum getPlanoSelecionado() {
+		return planoSelecionado;
 	}
 
-	public void setPlanoSeleciondo(PlanoDePagamentoEnum planoSeleciondo) {
-		this.planoSeleciondo = planoSeleciondo;
+	public void setPlanoSeleciondao(PlanoDePagamentoEnum planoSelecionado) {
+		this.planoSelecionado = planoSelecionado;
 	}
 
 	public List<Instrutor> getInstrutores() {
@@ -105,4 +105,5 @@ public class AlunoResponseDTO {
 	}
 
 
+	
 }

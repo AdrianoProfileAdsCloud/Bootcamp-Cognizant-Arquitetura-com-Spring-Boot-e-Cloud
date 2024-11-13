@@ -1,6 +1,10 @@
 package edu.prj.designpatterns.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,27 +42,43 @@ public class AlunoServiceImplementacao implements AlunoService {
 	}
 
 	@Override
-	public AlunoResponseDTO create(AlunoRequestDTO alunoRequestDTO, Long idInstrutor) {
+	@Transactional
+	public Aluno create(Aluno aluno, Long idInstrutor) {
 
-		String cep = alunoRequestDTO.getEndereco().getCep();
-		Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
-			// Caso não exista, integrar com o ViaCEP e persistir o retorno.
-			Endereco novoEndereco = viaCepService.consultarCep(cep);
-			enderecoRepository.save(novoEndereco);
-			return novoEndereco;
-		});
+	    // Validar entradas
+	    if (aluno == null || idInstrutor == null) {
+	        throw new IllegalArgumentException("Parâmetros inválidos: aluno ou idInstrutor é nulo.");
+	    }
 
-		// Mapear AlunoRequestDTO para Aluno
-		Aluno aluno = modelMapper.map(alunoRequestDTO, Aluno.class);
-		aluno.setEndereco(endereco);
+	    // Buscar ou criar o Endereço
+	    String cep = aluno.getEndereco().getCep();
+	    Endereco endereco = enderecoRepository.findById(cep).orElseGet(() -> {
+	        // Caso o endereço não exista, consultar o ViaCEP e persistir o retorno
+	        Endereco novoEndereco = viaCepService.consultarCep(cep);
+	        return enderecoRepository.save(novoEndereco);
+	    });
 
-		// Salvar Aluno
-		Aluno savedAluno = alunoRepository.save(aluno);
+	    // Definir o endereço no aluno
+	    aluno.setEndereco(endereco);
 
-		// Mapear Aluno para AlunoResponseDTO
-		return modelMapper.map(savedAluno, AlunoResponseDTO.class);
+	    // Buscar o Instrutor e associá-lo ao Aluno
+	    Optional<Instrutor> instrutorOpt = instrutorRepository.findById(idInstrutor);
+	    instrutorOpt.ifPresentOrElse(instrutor -> {
+	        // Adiciona o Instrutor ao Aluno
+	        aluno.getInstrutores().add(instrutor);
+	        
+	        // Adiciona o Aluno ao Instrutor para sincronizar o relacionamento bidirecional
+	        instrutor.getAlunos().add(aluno);
+	    }, () -> {
+	        throw new IllegalArgumentException("Instrutor com ID " + idInstrutor + " não encontrado.");
+	    });
 
+	    // Salvar Aluno e Instrutor (o cascade ALL na relação irá persistir na tabela de junção)
+	    Aluno savedAluno = alunoRepository.save(aluno);
+
+	    return savedAluno;
 	}
+
 
 	@Override
 	public void delete(Long id) {
@@ -82,9 +102,8 @@ public class AlunoServiceImplementacao implements AlunoService {
 	}
 
 	@Override
-	public Iterable<AlunoResponseDTO> getAll() {
+	public Iterable getAll() {
 
-		// return alunoRepository.findAll();
-		return null;
+		return alunoRepository.findAll();
 	}
 }

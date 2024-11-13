@@ -27,7 +27,6 @@ public class AlunoRequestDTO {
 	private String cpf;
 	private PlanoDePagamentoEnum planoSelecionado;
 	private List<Instrutor> instrutores = new ArrayList<>();
-		
 
 	public AlunoRequestDTO(String nome, Endereco endereco, LocalDateTime dataAniversario, int idade, char sexo,
 			String cpf, PlanoDePagamentoEnum planoSeleciondo, List<Instrutor> instrutores) {
@@ -38,7 +37,7 @@ public class AlunoRequestDTO {
 		this.sexo = sexo;
 		this.cpf = cpf;
 		this.planoSelecionado = planoSeleciondo;
-		this.instrutores = instrutores;
+		this.instrutores = instrutores = new ArrayList<Instrutor>();
 	}
 
 	public String getNome() {
@@ -103,6 +102,10 @@ public class AlunoRequestDTO {
 
 	public void setInstrutores(List<Instrutor> instrutores) {
 		this.instrutores = instrutores;
+	}
+
+	public void addInstrutores(Instrutor instrutor) {
+		instrutores.add(instrutor);
 	}
 
 }

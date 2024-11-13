@@ -1,9 +1,9 @@
 package edu.prj.designpatterns.model;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,10 +14,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import edu.prj.designpatterns.model.dto.AlunoRequestDTO;
+import edu.prj.designpatterns.model.dto.InstrutorRequestDTO;
 
 /**
  * @autor Adriano Aparecido da Silva
@@ -32,17 +34,26 @@ public class Aluno extends Pessoa {
 	@Column(name = "id_aluno")
 	private Long id;
 
-	@Column(name = "plano_seleciondo")
+	@Column(name = "plano_selecionado")
 	@Enumerated(EnumType.STRING)
-	private PlanoDePagamentoEnum planoSeleciondo;
+	private PlanoDePagamentoEnum planoSelecionado;
 
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.ALL }, fetch = FetchType.LAZY)
-	@JoinColumn(name = "aluno_id", referencedColumnName = "id")
-	private List<Instrutor> instrutores = new ArrayList<>();
+	@ManyToMany(mappedBy = "alunos",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Instrutor> instrutores= new ArrayList<Instrutor>();
 
 	public Aluno() {
 
 	}
+	
+	
+
+	public Aluno(Long id, PlanoDePagamentoEnum planoSelecionado, List<Instrutor> instrutores) {
+		this.id = id;
+		this.planoSelecionado = planoSelecionado;
+		this.instrutores = instrutores;
+	}
+
+
 
 	public Long getId() {
 		return id;
@@ -52,12 +63,12 @@ public class Aluno extends Pessoa {
 		this.id = id;
 	}
 
-	public PlanoDePagamentoEnum getPlanoSeleciondo() {
-		return planoSeleciondo;
+	public PlanoDePagamentoEnum getPlanoSelecionado() {
+		return planoSelecionado;
 	}
 
-	public void setPlanoSeleciondo(PlanoDePagamentoEnum planoSeleciondo) {
-		this.planoSeleciondo = planoSeleciondo;
+	public void setPlanoSelecionado(PlanoDePagamentoEnum planoSelecionado) {
+		this.planoSelecionado = planoSelecionado;
 	}
 
 	public List<Instrutor> getInstrutores() {
@@ -68,25 +79,4 @@ public class Aluno extends Pessoa {
 		this.instrutores = instrutores;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, instrutores, planoSeleciondo);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aluno other = (Aluno) obj;
-		return Objects.equals(id, other.id) && Objects.equals(instrutores, other.instrutores)
-				&& planoSeleciondo == other.planoSeleciondo;
-	}
-
-	public void addInstrutor(Instrutor instrutor) {
-		instrutores.add(instrutor);
-	}
 }

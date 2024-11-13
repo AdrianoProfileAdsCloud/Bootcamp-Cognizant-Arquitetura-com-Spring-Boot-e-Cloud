@@ -1,6 +1,6 @@
 package edu.prj.designpatterns.doc;
 
-public class DtosExplanacao {
+public class DtosExplicacao {
 
 	/**
 	 * DTO – Objeto de Transferencia de Dados Ideia do Post A ideia deste post é

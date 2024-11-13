@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.prj.designpatterns.interfaces.AlunoService;
 import edu.prj.designpatterns.model.Aluno;
-import edu.prj.designpatterns.model.dto.AlunoRequestDTO;
 import edu.prj.designpatterns.model.dto.AlunoResponseDTO;
 
 @RestController
@@ -28,13 +28,13 @@ public class AlunoController {
 	}
 
 	@PostMapping("/{idInstrutor}")
-	public ResponseEntity<Object> aluno(@RequestBody AlunoRequestDTO alunoRequestDTO, Long idInstrutor) {
+	public ResponseEntity<Aluno> aluno(@RequestBody Aluno aluno,@PathVariable  Long idInstrutor) {
 
-		AlunoResponseDTO aluno = alunoService.create(alunoRequestDTO, idInstrutor);	
+		Aluno alunoSaved = alunoService.create(aluno, idInstrutor);	
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		
-		return new ResponseEntity<>(aluno,headers,HttpStatus.CREATED);
+		return new ResponseEntity<>(alunoSaved,headers,HttpStatus.CREATED);
 
 	}
 
